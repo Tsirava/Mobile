@@ -8,10 +8,10 @@
 
 
     <TextView
-        android:id="@+id/famous_cocktail"
+        android:id="@+id/ability"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="vodka"
+        tools:text="limber"
         android:textAlignment="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

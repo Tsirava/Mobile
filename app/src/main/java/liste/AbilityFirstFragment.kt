@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
@@ -20,10 +21,13 @@ import tsirava.mobile.R
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class CocktailFirstFragment : Fragment() {
+class AbilityFirstFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private val adapter = CocktailAdapter(listOf())
+    private val adapter = AbilityAdapter(listOf(), ::onClickedPokemon)
+
+
+
     private val layoutManager = LinearLayoutManager (context)
 
 
@@ -41,9 +45,10 @@ class CocktailFirstFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.cokctail_recyclerview)
 
+
         recyclerView.apply {
-            layoutManager = this@CocktailFirstFragment.layoutManager
-            adapter = this@CocktailFirstFragment.adapter
+            layoutManager = this@AbilityFirstFragment.layoutManager
+            adapter = this@AbilityFirstFragment.adapter
 
         }
 
@@ -78,6 +83,10 @@ class CocktailFirstFragment : Fragment() {
 
 
         }
+    private fun onClickedPokemon(ability: Ability) {
+        findNavController().navigate(R.id.AbilityDetailFragment)
+
+    }
 
 
 

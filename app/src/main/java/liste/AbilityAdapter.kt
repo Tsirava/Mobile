@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tsirava.mobile.R
 
-class CocktailAdapter(private var dataSet: List<Ability>) :
-    RecyclerView.Adapter<CocktailAdapter.ViewHolder>() {
+class AbilityAdapter(private var dataSet: List<Ability>, var listener: ((Ability)->Unit)? = null) :
+    RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -19,7 +20,7 @@ class CocktailAdapter(private var dataSet: List<Ability>) :
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.famous_cocktail)
+            textView = view.findViewById(R.id.ability)
         }
     }
 
@@ -32,7 +33,7 @@ class CocktailAdapter(private var dataSet: List<Ability>) :
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.cocktail_item, viewGroup, false)
+            .inflate(R.layout.ability_item, viewGroup, false)
 
         return ViewHolder(view)
     }
@@ -42,8 +43,11 @@ class CocktailAdapter(private var dataSet: List<Ability>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val cocktail = dataSet[position]
-        viewHolder.textView.text = cocktail.name
+        val ability = dataSet[position]
+        viewHolder.textView.text = ability.name
+        viewHolder.itemView.setOnClickListener {
+            listener?.invoke(ability)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
