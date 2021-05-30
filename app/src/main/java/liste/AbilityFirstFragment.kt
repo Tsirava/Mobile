@@ -24,11 +24,9 @@ import tsirava.mobile.R
 class AbilityFirstFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private val adapter = AbilityAdapter(listOf(), ::onClickedPokemon)
+    private val adapter = AbilityAdapter(listOf(), ::onClickedAbility)
 
 
-
-    private val layoutManager = LinearLayoutManager (context)
 
 
     override fun onCreateView(
@@ -47,20 +45,15 @@ class AbilityFirstFragment : Fragment() {
 
 
         recyclerView.apply {
-            layoutManager = this@AbilityFirstFragment.layoutManager
+            layoutManager = LinearLayoutManager (context)
             adapter = this@AbilityFirstFragment.adapter
 
         }
 
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val AbilityAPI: AbilityAPI = retrofit.create(AbilityAPI::class.java)
 
-        AbilityAPI.getability().enqueue(object: Callback<AbilityResponse>{
+        Singletons.AbilityAPI.getability().enqueue(object: Callback<AbilityResponse>{
             override fun onResponse(
                 call: Call<AbilityResponse>, response: Response<AbilityResponse>) {
                 if (response.isSuccessful && response.body() != null) {
@@ -83,7 +76,7 @@ class AbilityFirstFragment : Fragment() {
 
 
         }
-    private fun onClickedPokemon(ability: Ability) {
+    private fun onClickedAbility(ability: Ability) {
         findNavController().navigate(R.id.AbilityDetailFragment)
 
     }
