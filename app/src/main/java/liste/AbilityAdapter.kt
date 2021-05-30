@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tsirava.mobile.R
 
-class AbilityAdapter(private var dataSet: List<Ability>, var listener: ((Ability)->Unit)? = null) :
+class AbilityAdapter(private var dataSet: List<Ability>, var listener: ((Int)->Unit)? = null) :
     RecyclerView.Adapter<AbilityAdapter.ViewHolder>() {
 
 
@@ -46,7 +46,7 @@ class AbilityAdapter(private var dataSet: List<Ability>, var listener: ((Ability
         val ability = dataSet[position]
         viewHolder.textView.text = ability.name
         viewHolder.itemView.setOnClickListener {
-            listener?.invoke(ability)
+            listener?.invoke(position)
         }
     }
 

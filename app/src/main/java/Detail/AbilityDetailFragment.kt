@@ -40,7 +40,8 @@ class AbilityDetailFragment : Fragment() {
 
         }
         private fun callApi() {
-            Singletons.AbilityAPI.getabilitydetail(id = "1")
+            val id = arguments?.getInt( "abilityId") ?: -1
+            Singletons.AbilityAPI.getabilitydetail(id)
                 .enqueue(object : Callback<AbilityDetailResponse> {
                     override fun onResponse(
                         call: Call<AbilityDetailResponse>,

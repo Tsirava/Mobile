@@ -20,7 +20,10 @@
         android:name="Detail.AbilityDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_ability_detail">
-
+        <argument
+            android:name="abilityID"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
             android:id="@+id/DetailFragmenttoAbilityFirstFragment"
             app:destination="@id/AbilityFirstFragment" />

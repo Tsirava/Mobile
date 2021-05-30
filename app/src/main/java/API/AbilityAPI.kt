@@ -13,5 +13,5 @@ interface  AbilityAPI {
 
 
     @GET("ability/{id}")
-    fun getabilitydetail(@Path("id") id : String): Call<AbilityDetailResponse>
+    fun getabilitydetail(@Path("id") id : Int): Call<AbilityDetailResponse>
 }
