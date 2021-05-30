@@ -1,15 +1,21 @@
 package liste
 
+import API.AbilityAPI
+import API.AbilityResponse
 import android.os.Bundle
-import android.renderscript.Sampler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import tsirava.mobile.R
-import java.time.temporal.ValueRange
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -41,15 +47,39 @@ class CocktailFirstFragment : Fragment() {
 
         }
 
-        val cocktaillist = arrayListOf<cocktail>().apply {
-            add(cocktail("vodka"))
-            add(cocktail("maythay"))
-            add(cocktail("mojito"))
-            add(cocktail("martini"))
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://pokeapi.co/api/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val AbilityAPI: AbilityAPI = retrofit.create(AbilityAPI::class.java)
+
+        AbilityAPI.getability().enqueue(object: Callback<AbilityResponse>{
+            override fun onResponse(
+                call: Call<AbilityResponse>, response: Response<AbilityResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val AbilityResponse = response.body()
+                    if (AbilityResponse != null) {
+                        adapter.updateList(AbilityResponse.results)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<AbilityResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
         }
 
-        adapter.updateList(cocktaillist)
+        )
+
+
+
+
+        }
+
+
 
     }
 
-}

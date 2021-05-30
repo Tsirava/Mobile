@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import tsirava.mobile.R
 
-class CocktailAdapter(private var dataSet: List<cocktail>) :
+class CocktailAdapter(private var dataSet: List<Ability>) :
     RecyclerView.Adapter<CocktailAdapter.ViewHolder>() {
 
     /**
@@ -23,7 +23,7 @@ class CocktailAdapter(private var dataSet: List<cocktail>) :
         }
     }
 
-    fun updateList(list: List<cocktail>){
+    fun updateList(list: List<Ability>){
         dataSet = list
         notifyDataSetChanged()
     }
