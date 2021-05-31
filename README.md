@@ -18,3 +18,4 @@ La liste des compétences
 
 les effets
 
+![alt text](https://github.com/Tsirava/Mobile/blob/master/images%20mobile/ability%20detailm.PNG?raw=true)
